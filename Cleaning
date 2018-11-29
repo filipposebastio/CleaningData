@@ -6,5 +6,9 @@ df['var1'] = np.where(df['var2'] > 400, 'high',
 #from string/float to numeric
 df['var1'] = pd.to_numeric(df['var1'], errors = 'coerce')
 
-#
-df['var1'] = df['var1'].rename({"1":'One', '2':"Two"})
+#rename columns
+df = df.rename({"1":'One', '2':"Two"})
+
+#dropping missing values
+df['gender'] = df['gender'].dropna()
+
