@@ -1,0 +1,3 @@
+##cross tab with percentage instead of frequency and margins - percentaged on row
+speak = pd.crosstab(df['gender'], df['Q4 speak_up'], margins=True, normalize = 'index')
+
