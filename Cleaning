@@ -1,0 +1,10 @@
+#logical filtering 
+#Be careful, columns can contain both object and numbers
+df['var1'] = np.where(df['var2'] > 400, 'high', 
+             (np.where(df['var2'] < 200, 'low', Other value not mapped)))
+
+#from string/float to numeric
+df['var1'] = pd.to_numeric(df['var1'], errors = 'coerce')
+
+#
+df['var1'] = df['var1'].rename({"1":'One', '2':"Two"})
