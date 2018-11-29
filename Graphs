@@ -1,0 +1,7 @@
+##get hold of editing features
+fig, ax = plt.subplots()
+#set size
+fig.set_size_inches(8,12)
+
+##set graph 
+sns.heatmap(pd.crosstab(df.gender, df.speak_up, normalize='index'), cmap="YlGnBu", annot=True, cbar=False)
