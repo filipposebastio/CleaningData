@@ -16,3 +16,8 @@ df['gender'] = df['gender'].dropna()
 list= ["Man", "Woman"]
 df = df[df['gender'].isin(list)]
 
+##looping through columns 
+col_list = df[['Q6', 'Q7','Q8', 'Q9']]
+for col in col_list:
+    df = df[df[col].isin(list3)]
+
