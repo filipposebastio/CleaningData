@@ -12,3 +12,7 @@ df = df.rename({"1":'One', '2':"Two"})
 #dropping missing values
 df['gender'] = df['gender'].dropna()
 
+##Filtering data on specific values
+list= ["Man", "Woman"]
+df = df[df['gender'].isin(list)]
+
