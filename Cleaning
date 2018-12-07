@@ -1,3 +1,16 @@
+### Append multiple files together
+path =r'C:\Users\filippo.sebastio\Desktop\files' # use your path
+allFiles = glob.glob(path + "/*.csv")
+frame = pd.DataFrame()
+list_ = []
+for file_ in allFiles:
+    df = pd.read_csv(file_,index_col=None, header=0)
+    list_.append(df)
+frame = pd.concat(list_)
+
+
+df = pd.read_excel(r'C:\Users\filippo.sebastio\Desktop\files\country_risk\country_risk.xlsx')
+
 #logical filtering 
 #Be careful, columns can contain both object and numbers
 df['var1'] = np.where(df['var2'] > 400, 'high', 
@@ -20,4 +33,14 @@ df = df[df['gender'].isin(list)]
 col_list = df[['Q6', 'Q7','Q8', 'Q9']]
 for col in col_list:
     df = df[df[col].isin(list3)]
+    
+pd.get_option("display.max_rows")    
 
+###Working with header
+df = df.drop(['Unnamed: 1'], axis=1)
+second = df.columns[1]
+df["Corso" ] = second
+
+new_header = df.iloc[0] #grab the first row for the header
+df = df[2:] #take the data less the header row
+df.columns = new_header #set the header row as the df header
