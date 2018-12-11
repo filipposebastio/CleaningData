@@ -11,6 +11,13 @@ frame = pd.concat(list_)
 
 df = pd.read_excel(r'C:\Users\filippo.sebastio\Desktop\files\country_risk\country_risk.xlsx')
 
+
+##groupby - groupby by country (or group) and return a variable with the count name 'counts'
+df = df.groupby('country').size().reset_index(name = 'counts')
+#by countyr, get the mean of price and points and the count of countries
+df = df.groupby('country').agg({'price':'mean', 'points':'mean', 'country':'count'})
+
+
 #logical filtering 
 #Be careful, columns can contain both object and numbers
 df['var1'] = np.where(df['var2'] > 400, 'high', 
