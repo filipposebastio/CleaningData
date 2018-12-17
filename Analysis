@@ -1,3 +1,13 @@
 ##cross tab with percentage instead of frequency and margins - percentaged on row
 speak = pd.crosstab(df['gender'], df['Q4 speak_up'], margins=True, normalize = 'index')
 
+#Simple OLS 
+import statsmodels.api as sm
+reg1 = sm.OLS(endog=df['Happiness.Score'], exog=df[['index', 'gdp']], missing='drop')
+type(reg1)
+results = reg1.fit()
+type(results)
+print(results.summary())
+###Robust standard errors!
+results_robust = results.get_robustcov_results()
+print(results_robust.summary())
