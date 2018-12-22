@@ -1,3 +1,8 @@
+##pick specific type of column and apply an operation/transfortmation
+#in this case, from object to category
+df[df.select_dtypes(['object']).columns] = df.select_dtypes(['object']).apply(lambda x: x.astype('category'))
+
+
 ### Append multiple files together
 path =r'C:\Users\filippo.sebastio\Desktop\files' # use your path
 allFiles = glob.glob(path + "/*.csv")
