@@ -33,9 +33,13 @@ df['var1'] = np.where(df['var2'] > 400, 'high',
 df['var1'] = pd.to_numeric(df['var1'], errors = 'coerce')
 
 #pick all columns with numbers and make them numeric from object
-#drop object columns
+
+#Drop columns names 
 cols = df.columns.drop(['Country','Overall Risk Band', 'Geography Risk Band'])
 df[cols] = df[cols].apply(pd.to_numeric, errors='coerce')
+
+#Drops columns
+df_num = df_num.drop(['Geography Confidence','Confidence Score'], axis=1) 
 
 #rename columns
 df = df.rename({"1":'One', '2':"Two"})
