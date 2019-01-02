@@ -1,7 +1,8 @@
 ##pick specific type of column and apply an operation/transfortmation
 #in this case, from object to category
 df[df.select_dtypes(['object']).columns] = df.select_dtypes(['object']).apply(lambda x: x.astype('category'))
-
+#select only numerical variables and create new dataset
+df_num = df.select_dtypes(include=[np.float])
 
 ### Append multiple files together
 path =r'C:\Users\filippo.sebastio\Desktop\files' # use your path
@@ -30,6 +31,11 @@ df['var1'] = np.where(df['var2'] > 400, 'high',
 
 #from string/float to numeric
 df['var1'] = pd.to_numeric(df['var1'], errors = 'coerce')
+
+#pick all columns with numbers and make them numeric from object
+#drop object columns
+cols = df.columns.drop(['Country','Overall Risk Band', 'Geography Risk Band'])
+df[cols] = df[cols].apply(pd.to_numeric, errors='coerce')
 
 #rename columns
 df = df.rename({"1":'One', '2':"Two"})
