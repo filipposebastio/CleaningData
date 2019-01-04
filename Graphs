@@ -18,6 +18,7 @@ for i in range(0, len(df_num.columns), 5):
                 y_vars=["Number of findings (total)"])
 
 ##Subplots!
+#Different axis
 plt.style.use('seaborn-white')
 df_s = df_num[df_num['Number of workers']<100 ]
 df_m = df_num[(df_num['Number of workers']>=100) & (df_num['Number of workers']< 500)]
@@ -47,8 +48,3 @@ fig.text(0.5, 0.001, 'Number of Staff Required', fontsize = 20, ha='center')
 fig.text(0.001, 0.5, 'Number of violations in factory',  fontsize = 20, va='center', rotation='vertical')
 fig.text(0.5, 1, 'Relationship between n. of auditing staff and number of violations encountered in factory', fontsize = 25, ha='center')
 
-
-
-
-fig.text(0.5, 0.01, 'Number of Staff Required', fontsize = 20, ha='center')
-fig.text(0.001, 0.5, 'Number of violations in factory',  fontsize = 20, va='center', rotation='vertical')
