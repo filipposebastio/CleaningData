@@ -5,3 +5,50 @@ fig.set_size_inches(8,12)
 
 ##set graph 
 sns.heatmap(pd.crosstab(df.gender, df.speak_up, normalize='index'), cmap="YlGnBu", annot=True, cbar=False)
+
+
+
+##Run multiple scatterplot with a y-specific column picking only numberic variables as your X
+df_num = df.select_dtypes(include = ['float64', 'int64'])
+df_num = df_num[df_num['Number of workers']<60000]
+df_num = df_num[df_num['Paid above monthly (%)']<101]
+for i in range(0, len(df_num.columns), 5):
+    sns.pairplot(data=df_num,
+                x_vars=df_num.columns[i:i+5],
+                y_vars=["Number of findings (total)"])
+
+##Subplots!
+plt.style.use('seaborn-white')
+df_s = df_num[df_num['Number of workers']<100 ]
+df_m = df_num[(df_num['Number of workers']>=100) & (df_num['Number of workers']< 500)]
+df_l = df_num[df_num['Number of workers']>=500]
+plt.rc('xtick', labelsize=15) 
+plt.rc('ytick', labelsize=15) 
+
+fig, (ax1 , ax2, ax3) = plt.subplots(nrows=1, ncols=3,  figsize=(24, 8), sharex=True, sharey=True)
+
+
+ax1.scatter(x=df_s['Required_Staff_Days__c'], y=df_s["Number of findings (total)"], s = 75, alpha = 0.5, c = 'skyblue')
+ax1.set_title('Small factories: workers 1-100', fontsize = 20)
+ax1.spines['right'].set_visible(False)
+ax1.spines['top'].set_visible(False)
+
+ax2.scatter(x=df_m['Required_Staff_Days__c'], y=df_m["Number of findings (total)"], s = 75, alpha = 0.5, c = 'lightseagreen')
+ax2.set_title('Medium factories: workers 101-500', fontsize = 20)
+ax2.spines['right'].set_visible(False)
+ax2.spines['top'].set_visible(False)
+
+ax3.scatter(x=df_l['Required_Staff_Days__c'], y=df_l["Number of findings (total)"], s = 75, alpha = 0.5)
+ax3.set_title('Large factories: workers>501', fontsize = 20)
+ax3.spines['right'].set_visible(False)
+ax3.spines['top'].set_visible(False)
+
+fig.text(0.5, 0.001, 'Number of Staff Required', fontsize = 20, ha='center')
+fig.text(0.001, 0.5, 'Number of violations in factory',  fontsize = 20, va='center', rotation='vertical')
+fig.text(0.5, 1, 'Relationship between n. of auditing staff and number of violations encountered in factory', fontsize = 25, ha='center')
+
+
+
+
+fig.text(0.5, 0.01, 'Number of Staff Required', fontsize = 20, ha='center')
+fig.text(0.001, 0.5, 'Number of violations in factory',  fontsize = 20, va='center', rotation='vertical')
