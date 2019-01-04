@@ -11,3 +11,13 @@ print(results.summary())
 ###Robust standard errors!
 results_robust = results.get_robustcov_results()
 print(results_robust.summary())
+
+##Run multiple scatterplot with a y-specific column picking only numberic variables as your X
+df_num = df.select_dtypes(include = ['float64', 'int64'])
+df_num = df_num[df_num['Number of workers']<60000]
+df_num = df_num[df_num['Paid above monthly (%)']<101]
+for i in range(0, len(df_num.columns), 5):
+    sns.pairplot(data=df_num,
+                x_vars=df_num.columns[i:i+5],
+                y_vars=["Number of findings (total)"])
+
