@@ -14,7 +14,7 @@ for file_ in allFiles:
     list_.append(df)
 frame = pd.concat(list_)
 
-
+##Read files
 df = pd.read_excel(r'C:\Users\filippo.sebastio\Desktop\files\country_risk\country_risk.xlsx')
 
 
@@ -32,8 +32,7 @@ df['var1'] = np.where(df['var2'] > 400, 'high',
 #from string/float to numeric
 df['var1'] = pd.to_numeric(df['var1'], errors = 'coerce')
 
-#pick all columns with numbers and make them numeric from object
-
+#######pick all columns with numbers and make them numeric from object
 #Drop columns names 
 cols = df.columns.drop(['Country','Overall Risk Band', 'Geography Risk Band'])
 df[cols] = df[cols].apply(pd.to_numeric, errors='coerce')
@@ -66,3 +65,11 @@ df["Corso" ] = second
 new_header = df.iloc[0] #grab the first row for the header
 df = df[2:] #take the data less the header row
 df.columns = new_header #set the header row as the df header
+
+
+####Regular expression
+#keep only observations with specific letter (ex 'sia') in objectcolumn
+asia = df_ts[df_ts.ISO_Sub_Region.str.contains('sia')]
+
+
+
