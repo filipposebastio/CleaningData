@@ -1,3 +1,7 @@
+##Single tab
+my_tab = pd.crosstab(index=titanic_train["Survived"],  # Make a crosstab
+                              columns="count")      # Name the count column
+
 ##cross tab with percentage instead of frequency and margins - percentaged on row
 speak = pd.crosstab(df['gender'], df['Q4 speak_up'], margins=True, normalize = 'index')
 
