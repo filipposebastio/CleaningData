@@ -46,15 +46,18 @@ df = df.rename({"1":'One', '2':"Two"})
 #dropping missing values
 df['gender'] = df['gender'].dropna()
 
-##Filtering data on specific values
-list= ["Man", "Woman"]
-df = df[df['gender'].isin(list)]
+####APPLY OPERATION TO ONLY SPECIFIC COLUMN
+turkey[['Afghanistan', 'Azerbaijan', 'Ethiopia', 'Georgia', 'Iran, Islamic Republic of', 'Russian Federation', 'Syrian Arab Republic', 'Turkey']] = turkey[['Afghanistan', 'Azerbaijan', 'Ethiopia', 'Georgia', 'Iran, Islamic Republic of', 'Russian Federation', 'Syrian Arab Republic', 'Turkey']].fillna(value=0)
 
 ##looping through columns 
 col_list = df[['Q6', 'Q7','Q8', 'Q9']]
 for col in col_list:
     df = df[df[col].isin(list3)]
-    
+
+##Filtering data on specific values
+list= ["Man", "Woman"]
+df = df[df['gender'].isin(list)]
+
 pd.get_option("display.max_rows")    
 
 ###Working with header
