@@ -25,3 +25,6 @@ for i in range(0, len(df_num.columns), 5):
                 x_vars=df_num.columns[i:i+5],
                 y_vars=["Number of findings (total)"])
 
+
+###EDA by group 
+turkey_dummy.groupby('Syrian Arab Republic')['Labour Standards Findings'].describe()
