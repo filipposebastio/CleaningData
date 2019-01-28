@@ -44,7 +44,7 @@ df_num = df_num.drop(['Geography Confidence','Confidence Score'], axis=1)
 df = df.rename({"1":'One', '2':"Two"})
 
 #dropping missing values
-df['gender'] = df['gender'].dropna()
+country = country[np.isfinite(country['wage_gap_%'])]
 
 ####APPLY OPERATION TO ONLY SPECIFIC COLUMN
 turkey[['Afghanistan', 'Azerbaijan', 'Ethiopia', 'Georgia', 'Iran, Islamic Republic of', 'Russian Federation', 'Syrian Arab Republic', 'Turkey']] = turkey[['Afghanistan', 'Azerbaijan', 'Ethiopia', 'Georgia', 'Iran, Islamic Republic of', 'Russian Federation', 'Syrian Arab Republic', 'Turkey']].fillna(value=0)
