@@ -23,6 +23,8 @@ df = df.groupby('country').size().reset_index(name = 'counts')
 #by countyr, get the mean of price and points and the count of countries
 df = df.groupby('country').agg({'price':'mean', 'points':'mean', 'country':'count'})
 
+###grouby and resample 
+df_sub_rg = df_tr.groupby('ISO_Sub_Region').resample('Y')['Transparency'].mean()
 
 #logical filtering 
 #Be careful, columns can contain both object and numbers
