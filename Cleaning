@@ -25,6 +25,8 @@ df = df.groupby('country').agg({'price':'mean', 'points':'mean', 'country':'coun
 
 ###grouby and resample 
 df_sub_rg = df_tr.groupby('ISO_Sub_Region').resample('Y')['Transparency'].mean()
+df_sub_rg = df_tr.groupby('ISO_Sub_Region').resample('Y')['Transparency_numeric'].mean().to_frame('count').reset_index()
+
 
 #logical filtering 
 #Be careful, columns can contain both object and numbers
