@@ -58,6 +58,10 @@ col_list = df[['Q6', 'Q7','Q8', 'Q9']]
 for col in col_list:
     df = df[df[col].isin(list3)]
 
+##Iterate and create new columns using prefix and suffix!
+for col in pdi_bei[col]:
+    pdi_bei[col+'_to_numeric'] = pd.to_numeric(pdi_bei[col], errors = 'coerce')
+
 ##Filtering data on specific values
 list= ["Man", "Woman"]
 df = df[df['gender'].isin(list)]
