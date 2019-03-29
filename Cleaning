@@ -83,4 +83,16 @@ df.columns = new_header #set the header row as the df header
 asia = df_ts[df_ts.ISO_Sub_Region.str.contains('sia')]
 
 
+# import datetime
+# df_f_c = df.groupby(['Factory', 'Count']).first().reset_index()
+# df_f_c['Initial Date'] =  np.where((df_f_c.Factory.str.contains('Chung Sen')) & (df_f_c['Count']==0) , datetime.datetime(2018, 1, 1), np.NaN)
+# df_f_c['Initial Date'] =  np.where((df_f_c.Factory.str.contains('Hansae')) & (df_f_c['Count']==0) , datetime.datetime(2017, 12, 1), np.NaN)
+# df_f_c['Initial Date'] =  np.where((df_f_c.Factory.str.contains('Texpia')) & (df_f_c['Count']==0) , datetime.datetime(2018, 1, 1), np.NaN)
+# df_f_c['Initial Date'] =  np.where((df_f_c.Factory.str.contains('Jingsheng')) & (df_f_c['Count']==0) , datetime.datetime(2018, 1, 1), np.NaN)
+# df_f_c['Initial Date'] =  np.where((df_f_c.Factory.str.contains('Putian')) & (df_f_c['Count']==0) , datetime.datetime(2018, 1, 1), np.NaN)
+
+
+
+
+# df_f_c[['Factory', 'Initial Date']]
 
