@@ -28,3 +28,21 @@ for i in range(0, len(df_num.columns), 5):
 
 ###EDA by group 
 turkey_dummy.groupby('Syrian Arab Republic')['Labour Standards Findings'].describe()
+
+
+###Text analysis
+
+sub['POS'] = pos_tag_sents(sub['body'].apply(word_tokenize).tolist() )
+def extract_pos(line,pos):
+    return [word[0] for word in line if word[1] == pos]
+sub['NNP'] = [extract_pos(line,'NNP') for line in sub['POS']]
+sub['JJ'] = [extract_pos(line,'JJ') for line in sub['POS']]
+sub['NN'] = [extract_pos(line,'NNP') for line in sub['POS']]
+sub['FW'] = [extract_pos(line,'FW') for line in sub['POS']]
+
+
+
+##Sentiment 
+
+df_lower['sentiment'] = df_lower['body'].apply(lambda tweet: TextBlob(tweet).sentiment)
+df_lower['Polarity'], df_lower['Subjectivity'] = zip(*df_lower.sentiment)
