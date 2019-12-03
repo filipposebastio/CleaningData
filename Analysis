@@ -46,3 +46,33 @@ sub['FW'] = [extract_pos(line,'FW') for line in sub['POS']]
 
 df_lower['sentiment'] = df_lower['body'].apply(lambda tweet: TextBlob(tweet).sentiment)
 df_lower['Polarity'], df_lower['Subjectivity'] = zip(*df_lower.sentiment)
+
+
+
+##number of individual words in pandas columns
+
+import nltk
+
+top_N = 100
+
+txt = dfhs['Good list lower'] .str.lower().str.replace(r'\|', ' ').str.cat(sep=' ')
+words = nltk.tokenize.word_tokenize(txt)
+word_dist = nltk.FreqDist(words)
+
+stopwords = nltk.corpus.stopwords.words('english')
+words_except_stop_dist = nltk.FreqDist(w for w in words if w not in stopwords) 
+
+# print('All frequencies, including STOPWORDS:')
+# print('=' * 60)
+# rslt = pd.DataFrame(word_dist.most_common(top_N),
+#                     columns=['Word', 'Frequency'])
+print('=' * 60)
+
+rslt = pd.DataFrame(words_except_stop_dist.most_common(top_N),
+                    columns=['Word', 'Frequency']).set_index('Word')
+rslt
+# plt.style.use('ggplot')
+
+# plt = rslt.plot.bar(rot=0)
+
+
