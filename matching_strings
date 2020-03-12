@@ -1,0 +1,26 @@
+###looks in a list of names and adds 1 to a new variable every time a match is met. 
+ersa['brand names lower'] = ersa[ 'Program'].str.lower()
+#creates list out of ersa names
+list_all_lower = ersa['brand names lower'].tolist()
+
+
+pnj['brand lower'] = pnj['Consignee names'].str.lower()
+pnj['Brand | yes'] = pnj['brand lower'].str.findall('|'.join(list_all_lower)).str.len()
+yes_exact = pnj[pnj['Factory yes']==1]
+yes_exact
+
+
+##Fuzzy Match
+#looks at the matches between ersa brand and pnjiva cosnignee and select those that have a lexical distance > 0.9
+#you can change the score (0.9) to test different options. 
+#Read about difflib before running the program.
+!pip install difflib
+import difflib
+pnj['Program'] = pnj['Consignee names'].apply(lambda x: (difflib.get_close_matches(x, ersa['Program'], cutoff=0.9)[:1] or [None])[0])
+df3 = pd.merge(df, ersa, on ='Program', how ='inner')
+df3
+
+##
+#Exact Match - Simple Pandas Merge.
+#careful with upper and lower case
+df4 = pd.merge(pjv, ersa, left_on = pjv['Consignee'],  right_on =ersa['Program'], how = 'inner')
