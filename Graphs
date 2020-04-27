@@ -1,3 +1,59 @@
+###Hans Rosling kind of Vizualization n
+
+wide = score_wb.pivot_table(index = 'Country', columns = 'Year', values = ['Forced Labor Index (ELEVATE)', 'Unauthorized Sub-contracting Index (ELEVATE)', 'value']).reset_index()
+wide.columns = wide.columns.map(' | '.join).str.strip('|')
+wide.head()
+
+colors = {'High Risk':'darkorange', 'Low Risk':'green',  'Extreme Risk':'red', 'Medium Risk':'yellow' }
+
+wide['Risk'] = np.where(wide['Forced Labor Index (ELEVATE) | 2020.0']<2.49, 'Extreme Risk',
+                       np.where((wide['Forced Labor Index (ELEVATE) | 2020.0']>2.50) & (wide['Forced Labor Index (ELEVATE) | 2020.0']<4.99), 'High Risk',
+                               np.where((wide['Forced Labor Index (ELEVATE) | 2020.0']>4.99) & (wide['Forced Labor Index (ELEVATE) | 2020.0']<7.49), 'Medium Risk','Low Risk'))) 
+
+wide['Pop (2018)'] = wide['value | 2018.0']/1000000
+
+sns.despine()
+plt.figure(dpi=150)
+plt.scatter(wide['Unauthorized Sub-contracting Index (ELEVATE) | 2020.0'], wide['Forced Labor Index (ELEVATE) | 2020.0'],  s = wide['Pop (2018)'] , c = wide['Risk'].apply(lambda x: colors[x])  )
+ax = plt.subplot()
+sns.despine()
+plt.grid(False)
+
+csfont = {'fontname':'Franklin Gothic Book' }
+hfont = {'fontname':'Franklin Gothic Book'}
+
+plt.xlabel('Unauthorized Subcontracting (2020)', fontsize = 8, **hfont)
+plt.ylabel('Forced Labor Risk (ELEVATE) (2020)', fontsize = 8, **hfont)
+plt.title('Forced Labor Risk in 2020 and Subcontracting', fontsize = 12, **hfont, loc='left')
+
+ax = plt.gca()
+# from matplotlib.ticker import PercentFormatter
+# ax.yaxis.set_major_formatter(PercentFormatter())
+ax.tick_params(axis='both', which='major', labelsize=8)
+
+plt.axvline(x=5, color='k', linestyle='--',linewidth = 0.5)
+plt.axhline(y=5, color='k', linestyle='--',linewidth = 0.5)
+
+# plt.text(0, 4, 'High or Extreme Forced Labor \nand Subcontracting Risk', **hfont, fontsize =8)
+# plt.text(4.54, 29.5562, 'China', **hfont)
+# plt.text(2.514053, -42.5929, 'United States', **hfont)
+# plt.text(5.5, 10, 'Low or Medium Forced Labor/Subcontracting Risk', **hfont, fontsize =8)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ##get hold of editing features
 fig, ax = plt.subplots()
 #set size
